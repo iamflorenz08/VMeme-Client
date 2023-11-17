@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { MdNavigateNext } from '@react-icons/all-files/md/MdNavigateNext'
+import { FaHamburger } from '@react-icons/all-files/fa/FaHamburger'
 export default function ExhibitionsSection() {
     return (
         <section className='container mx-auto xl:px-20 duration-300'>

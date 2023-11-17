@@ -8,7 +8,7 @@ export default function Home() {
     <main className='xl:mt-20'>
       <ExhibitionsSection />
       <ArtistsSection />
-      <BookSection />
+      {/* <BookSection /> */}
     </main>
   )
 }

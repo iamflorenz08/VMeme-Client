@@ -44,7 +44,7 @@ export default function ArtistsSection() {
                             <div className='flex justify-center'>
                                 <div className='flex flex-col gap-6 w-fit px-5'>
                                     <Image className='h-[380px]  object-cover object-top' src={'/alaya.webp'} alt='alaya' width={1000} height={1000} />
-                                    <h1 className='text-black text-left uppercase font-bold  -tracking-widest'>Alaya Esguerra</h1>
+                                    <h1 className='text-black text-left uppercase font-bold'>Alaya Esguerra</h1>
                                     <button className='flex items-center px-6 py-2 border-[2.5px] border-primary rounded-md w-fit hover:bg-primary hover:text-white duration-300 font-normal'>
                                         See Artist
                                     </button>
