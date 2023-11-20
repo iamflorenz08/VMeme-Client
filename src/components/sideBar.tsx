@@ -6,6 +6,7 @@ import { IoMdClose } from '@react-icons/all-files/io/IoMdClose'
 import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu'
 import { IoChevronDownOutline } from '@react-icons/all-files/io5/IoChevronDownOutline'
 import { useState } from "react"
+import { signIn } from 'next-auth/react'
 
 interface INavigation {
     label: string,
@@ -34,12 +35,12 @@ export default function SideBar() {
         },
         {
             label: 'Artists',
-            href: '/',
-            current: false
+            href: '/artists',
+            current: segment === 'artists'
         },
         {
             label: 'About',
-            href: '/',
+            href: '/about',
             current: false
         }
     ]
@@ -68,7 +69,7 @@ export default function SideBar() {
                 </div>
 
                 <div className="flex items-center gap-5">
-                    <button>Login</button>
+                    <button onClick={() => signIn()}>Login</button>
                     <button
                         className="text-4xl  md:hidden"
                         onClick={() => setIsNavOpen(value => !value)}>
