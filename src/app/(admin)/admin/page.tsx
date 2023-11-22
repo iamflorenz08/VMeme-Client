@@ -1,5 +1,8 @@
 'use client'
 import { useState } from "react"
+import Image from "next/image"
+import ProfileForm from "./Profile";
+import DashboardForm from "./Dashboard";
 
 interface Props {
   displayForm: (ExhibitionsForm: string) => void;
@@ -14,103 +17,162 @@ const FirstForm: React.FC<Props> = ({ displayForm }) => {
   };
 
   return (
-    <div className="w-1/4 bg-white p-4">
-      <div className="space-y-6">
+    <div className="w-1/4 bg-white p-4 border-r-2 border-gray rounded-l-lg">
+      <div className="space-y-2">
+
+        <div className="mb-4 ">
+          <Image src={"/vmeme_logo.jpg"} alt="logo" width={150} height={32} />
+        </div>
+
+        <div className="sm:h-4"/>
 
         <button
-          onClick={() => handleButtonClick('Exhibitions')}
-          className={`flex items-center px-4 py-2 border-2 border-primary rounded-md sm:w-40 hover:bg-primary hover:text-white duration-300 font-semibold ${activeButton === 'Exhibitions' ? 'bg-primary text-white' : ''
+          onClick={() => handleButtonClick('Dashboard')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'Dashboard' ? 'bg-white text-primary' : ''
             }`}
         >
-          Exhibitions
+          Dashboard
         </button>
 
         <button
-          onClick={() => handleButtonClick('Artist')}
-          className={`flex items-center px-4 py-2 border-2 border-primary rounded-md sm:w-40 hover:bg-primary hover:text-white duration-300 font-semibold ${activeButton === 'Artist' ? 'bg-primary text-white' : ''
+          onClick={() => handleButtonClick('WebsiteSettings')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'WebsiteSettings' ? 'bg-white text-primary' : ''
             }`}
         >
-          Artist
+          Website Settings
         </button>
 
         <button
-          onClick={() => handleButtonClick('Arts')}
-          className={`flex items-center px-4 py-2 border-2 border-primary rounded-md sm:w-40 hover:bg-primary hover:text-white duration-300 font-semibold ${activeButton === 'Arts' ? 'bg-primary text-white' : ''
+          onClick={() => handleButtonClick('ShopSettings')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'ShopSettings' ? 'bg-white text-primary' : ''
             }`}
         >
-          Arts
+          Shop Settings
         </button>
 
         <button
-          onClick={() => handleButtonClick('Records')}
-          className={`flex items-center px-4 py-2 border-2 border-primary rounded-md sm:w-40 hover:bg-primary hover:text-white duration-300 font-semibold ${activeButton === 'Records' ? 'bg-primary text-white' : ''
+          onClick={() => handleButtonClick('PaintingManagement')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'PaintingManagement' ? 'bg-white text-primary' : ''
             }`}
         >
-          Records
+          Painting Management
+        </button>
+
+        <button
+          onClick={() => handleButtonClick('OrderManagement')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'OrderManagement' ? 'bg-white text-primary' : ''
+            }`}
+        >
+          Order Management
+        </button>
+
+        <button
+          onClick={() => handleButtonClick('ManageSlide')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'ManageSlide' ? 'bg-white text-primary' : ''
+            }`}
+        >
+          Manage Slide
+        </button>
+
+        <button
+          onClick={() => handleButtonClick('Services')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'Services' ? 'bg-white text-primary' : ''
+            }`}
+        >
+          Services
+        </button>
+
+        <button
+          onClick={() => handleButtonClick('FAQ')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'FAQ' ? 'bg-white text-primary' : ''
+            }`}
+        >
+          FAQ
+        </button>
+
+        <button
+          onClick={() => handleButtonClick('RegisterCustomer ')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'RegisterCustomer ' ? 'bg-white text-primary' : ''
+            }`}
+        >
+          Register Customer 
+        </button>
+
+        <button
+          onClick={() => handleButtonClick('PageSettings')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'PageSettings' ? 'bg-white text-primary' : ''
+            }`}
+        >
+          PageSettings
+        </button>
+
+        <button
+          onClick={() => handleButtonClick('SocialMedia')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'SocialMedia' ? 'bg-white text-primary' : ''
+            }`}
+        >
+          Social Media
+        </button>
+
+        <button
+          onClick={() => handleButtonClick('Subscriber ')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'Subscriber' ? 'bg-white text-primary' : ''
+            }`}
+        >
+          Subscriber 
         </button>
       </div>
     </div>
   );
 };
 
-const ExhibitionsForm: React.FC = () => {
+
+
+
+
+const WebsiteSettingsForm = () => {
   return (
-    <div className="w-3/4 bg-white p-4">
-      <h1 className="text-lg font-semibold mb-4">Exhibitions Form</h1>
-      <p>This is the Exhibitions form.</p>
+    <div className="w-3/4 bg-white p-4 border-r-2 border-gray rounded-r-lg">
+      <h1 className="text-lg font-semibold mb-4">Website Settings</h1>
+      <p>This is the Website Settings form.</p>
     </div>
   );
 };
 
-const ArtistForm = () => {
+const ShopSettingsForm = () => {
   return (
-    <div className="w-3/4 bg-white p-4">
-      <h1 className="text-lg font-semibold mb-4">Artist Form</h1>
-      <p>This is the Artist form.</p>
+    <div className="w-3/4 bg-white p-4 border-r-2 border-gray rounded-r-lg">
+      <h1 className="text-lg font-semibold mb-4">Shop Settings Form</h1>
+      <p>This is the Shop Settings form.</p>
     </div>
   );
 };
 
-const ArtsForm = () => {
+const PaintingManagementForm = () => {
   return (
-    <div className="w-3/4 bg-white p-4">
-      <h1 className="text-lg font-semibold mb-4">Arts Form</h1>
-      <p>This is the Arts form.</p>
-    </div>
-  );
-};
-
-const RecordsForm = () => {
-  return (
-    <div className="w-3/4 bg-white p-4">
-      <h1 className="text-lg font-semibold mb-4">Records Form</h1>
+    <div className="w-3/4 bg-white p-4 border-r-2 border-gray rounded-r-lg">
+      <h1 className="text-lg font-semibold mb-4">Painting Management Form</h1>
       <p>This is the Records form.</p>
     </div>
   );
 };
 
 export default function AdminPage() {
-  const [currentForm, setCurrentForm] = useState<string>('Exhibitions');
+  const [currentForm, setCurrentForm] = useState<string>('Dashboard');
 
   const displayForm = (formName: string) => {
     setCurrentForm(formName);
   };
 
   return (
-    <div className="flex h-screen space-x-4">
-
-      <div className="w-1/12" />
+    <div className="bg-gray flex h-screen space-x-1">
+      <div className="sm:w-6" />
 
       <FirstForm displayForm={displayForm} />
 
-      <div className="w-1/24" />
+      {currentForm === 'Dashboard' && <DashboardForm />}
 
-      {currentForm === 'Exhibitions' && <ExhibitionsForm />}
-      {currentForm === 'Artist' && <ArtistForm />}
-      {currentForm === 'Arts' && <ArtsForm />}
-      {currentForm === 'Records' && <RecordsForm />}
-
-      <div className="w-1/12" />
+      <div className="sm:w-6" />
     </div>
   );
 }
