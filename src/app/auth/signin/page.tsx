@@ -1,7 +1,17 @@
+'use client'
 import Link from 'next/link'
 import React from 'react'
+import { signIn } from 'next-auth/react'
 
 export default function SignInPage() {
+
+    const handleSubmit = async () => {
+        await signIn('credentials', {
+            email: 'hi',
+            type: 'otp',
+            callbackUrl: 'https://www.google.com'
+        })
+    }
     return (
         <main className='h-full w-full flex flex-col gap-5 items-center justify-center'>
             <div className='shadow-lg p-8 flex flex-col gap-8 w-full max-w-[400px]'>
@@ -17,7 +27,9 @@ export default function SignInPage() {
                         type="password" name="password" id="password" />
 
                 </div>
-                <button className='bg-primary rounded-full text-white py-3'>Sign in</button>
+                <button
+                    onClick={handleSubmit}
+                    className='bg-primary rounded-full text-white py-3'>Sign in</button>
             </div>
             <h1 className='flex gap-2'>
                 New to vMeme?

@@ -15,8 +15,6 @@ interface INavigation {
     icon?: any
 }
 
-
-
 export default function SideBar() {
     const segment = useSelectedLayoutSegment()
     const [isNavOpen, setIsNavOpen] = useState<boolean>(false)

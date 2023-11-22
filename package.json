@@ -14,7 +14,8 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
-    "swiper": "^11.0.4"
+    "swiper": "^11.0.4",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
