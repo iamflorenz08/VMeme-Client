@@ -1,5 +1,7 @@
 import Footer from '@/components/footer'
 import Image from "next/image"
+import ProfileForm from './Profile'
+import DashboardForm from './Dashboard'
 
 
 
@@ -9,17 +11,11 @@ interface IProps {
 
 export default function layout({ children }: IProps) {
     return (
-        <section>
-            <nav className="py-10 px-5 md:px-0 flex justify-between items-center container mx-auto">
-                <div>
-                    <Image src={"/vmeme_logo.jpg"} alt="logo" width={150} height={32} />
-                </div>
-                <div className="flex items-center gap-5">
-                    <button>Logout</button>
-                </div>
-            </nav>
+        <section className='bg-gray'>
+            <div className="sm:h-6" />
             {children}
-            <Footer />
+            <div className="sm:h-6" />
+            <Footer/>
         </section>
     )
 }
