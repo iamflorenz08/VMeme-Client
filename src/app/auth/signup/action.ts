@@ -1,9 +1,11 @@
 'use server'
 import z from 'zod'
 import { IState } from './signupForm'
+import { cookies } from 'next/headers'
 
 export async function signup(prevState: any, formData: FormData) {
     const result: IState = {
+        success: false,
         email: '',
         firstName: '',
         lastName: '',
@@ -46,9 +48,27 @@ export async function signup(prevState: any, formData: FormData) {
             })
         })
 
-        console.log(await res.json())
+        const data = await res.json()
+        
+        if (!data.success) {
+            result.message = data.message
 
+            if (data.message === 'Email is in used.') {
+                result.email = data.message
+            }
+
+            return result
+        }
+
+        cookies().set({
+            name: 'otp-email',
+            value: User.email,
+            secure: true,
+        })
+
+        result.success = true
         return result
+
     } catch (e) {
         if (e instanceof z.ZodError) {
             e.errors.map((value, index) => {
@@ -60,4 +80,6 @@ export async function signup(prevState: any, formData: FormData) {
         }
         return result
     }
+
+
 }

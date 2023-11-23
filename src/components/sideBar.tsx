@@ -6,7 +6,7 @@ import { IoMdClose } from '@react-icons/all-files/io/IoMdClose'
 import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu'
 import { IoChevronDownOutline } from '@react-icons/all-files/io5/IoChevronDownOutline'
 import { useState } from "react"
-import { signIn } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 interface INavigation {
     label: string,

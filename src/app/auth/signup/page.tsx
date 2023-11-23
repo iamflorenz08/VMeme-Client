@@ -4,8 +4,6 @@ import SignUpForm from "./signupForm"
 
 
 export default function SignUpPage() {
-
-
     return (
         <main className='h-full w-full flex flex-col gap-5 items-center justify-center'>
             <SignUpForm />

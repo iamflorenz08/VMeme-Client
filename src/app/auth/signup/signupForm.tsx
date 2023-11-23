@@ -1,10 +1,13 @@
 'use client'
 import { useFormState, useFormStatus } from "react-dom"
 import { signup } from "./action"
-import AuthInputBox from "./authInputBox"
+import AuthInputBox from "../authInputBox"
+import { redirect } from "next/navigation"
 
 export interface IState {
     [key: string]: string | any,
+    success: boolean
+    callBackUrl?: string | null,
     email?: string | null,
     firstName?: string | null,
     lastName?: string | null,
@@ -12,12 +15,16 @@ export interface IState {
     confirmPassword?: string | null
 }
 
-const initialState: IState = {}
+const initialState: IState = {
+    success: false
+}
 
 
 export default function SignUpForm() {
     const { pending } = useFormStatus()
     const [state, formAction] = useFormState(signup, initialState)
+    if (state?.success) redirect('/auth/otp')
+
     return (
         <form action={formAction} className='shadow-lg p-8 flex flex-col gap-8 w-full max-w-[400px]'>
             <h1 className='font-medium text-3xl'>Sign up</h1>
@@ -27,7 +34,7 @@ export default function SignUpForm() {
                     id="email"
                     name="email"
                     placeholder="Email"
-                    errorMessage={state.email}
+                    errorMessage={state?.email}
                 />
 
                 <AuthInputBox
@@ -35,7 +42,7 @@ export default function SignUpForm() {
                     id="firstName"
                     name="firstName"
                     placeholder="First name"
-                    errorMessage={state.firstName}
+                    errorMessage={state?.firstName}
                 />
 
                 <AuthInputBox
@@ -43,7 +50,7 @@ export default function SignUpForm() {
                     id="lastName"
                     name="lastName"
                     placeholder="Last name"
-                    errorMessage={state.lastName}
+                    errorMessage={state?.lastName}
                 />
 
                 <AuthInputBox
@@ -51,7 +58,7 @@ export default function SignUpForm() {
                     id="password"
                     name="password"
                     placeholder="Password"
-                    errorMessage={state.password}
+                    errorMessage={state?.password}
                 />
 
                 <AuthInputBox
@@ -59,12 +66,12 @@ export default function SignUpForm() {
                     id="confirmPassword"
                     name="confirmPassword"
                     placeholder="Confirm password"
-                    errorMessage={state.confirmPassword}
+                    errorMessage={state?.confirmPassword}
                 />
             </div>
             <button
                 type="submit"
-                className='bg-primary rounded-full text-white py-3'>Sign up</button>
+                className='bg-primary rounded-full text-white py-3'>{!pending ? 'Sign up' : 'Loading'}</button>
         </form>
     )
 }
