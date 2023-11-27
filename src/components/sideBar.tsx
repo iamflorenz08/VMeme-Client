@@ -9,7 +9,7 @@ import { useState } from "react"
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { IoCartOutline } from '@react-icons/all-files/io5/IoCartOutline'
 import ProfileDropDown from "./profileDropDown"
-interface INavigation {
+export interface INavigation {
     label: string,
     href: string,
     current: boolean,
