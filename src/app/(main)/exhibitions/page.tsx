@@ -36,8 +36,7 @@ const CurrentExhibits: IExhibits[] = [
 
 export default function page() {
     return (
-        <main className="flex flex-col container mx-auto xl:px-20 mt-20 mb-20">
-
+        <main className="flex flex-col container mx-auto xl:px-20 mt-20 mb-20 duration-300">
             <div className="max-w-full mx-auto columns-3 space-y-5 gap-5">
                 {CurrentExhibits.map((value, index) => (
                     <div key={index} className={`group w-full h-full relative`}>

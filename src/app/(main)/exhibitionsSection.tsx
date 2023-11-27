@@ -33,7 +33,7 @@ export default function ExhibitionsSection() {
                             featuring eight outstanding filipino artists sharing their minutest expression and impression of breath. In various approaches, these contemporary artists take us to moments of recalling, thinking, feeling, paying tribute, imagining, simply honoring the opportunity of breathing, and celebrating spaces and time to breathe as spaces and time to be more and more alive.
                         </p>
                         <div className='text-center mt-5 lg:text-left'>
-                            <button className='flex items-center px-4 py-2 border-2 border-primary rounded-md w-fit hover:bg-primary hover:text-white duration-300 font-semibold'>
+                            <button className='flex items-center px-4 py-2 rounded-md w-fit bg-primary hover:bg-primary-200 text-white duration-300 font-semibold'>
                                 Read More
                                 <span className='text-2xl'><MdNavigateNext /></span>
                             </button>
@@ -51,7 +51,7 @@ export default function ExhibitionsSection() {
                             Foral Artists Manila (FAM), the country’s first all-women group of visual artists creating floral artworks, opens their 10th exhibit entitled FLOURISH.  FAM, formed in 2019 by Addie Cukingnan and Remy Boquiren, is a mix of mid-career and seasoned artists known for their individual style of floral compositions. In FLOURISH group exhibit, FAM members celebrate a garland of women’s artistry, skills and creativity put together in a colorful arrangement.
                         </p>
                         <div className='text-center mt-5 lg:text-left'>
-                            <button className='flex items-center px-4 py-2 border-2 border-primary rounded-md w-fit hover:bg-primary hover:text-white duration-300 font-semibold'>
+                            <button className='flex items-center px-4 py-2 rounded-md w-fit bg-primary hover:bg-primary-200 text-white duration-300 font-semibold'>
                                 Read More
                                 <span className='text-2xl'><MdNavigateNext /></span>
                             </button>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import Link from 'next/link'
 
 export default function ArtistsPage() {
     return (
@@ -18,7 +18,7 @@ export default function ArtistsPage() {
                         <Image className="object-cover w-full max-h-[450px]" src={'/alaya.webp'} alt="artist" width={800} height={800} />
                         <div className="absolute top-0 left-0 bg-black w-full h-full bg-opacity-50 flex flex-col gap-5 items-center justify-center text-white ">
                             <h1 className="tracking-[10px] text-xl uppercase">Alaya Esguerra</h1>
-                            <button className="px-6 py-2 border border-white">View arts</button>
+                            <Link href={'/artists/123'} className="px-6 py-2 border border-white">View arts</Link>
                         </div>
                     </div>
                 ))}

@@ -3,7 +3,7 @@ import { MdNavigateNext } from '@react-icons/all-files/md/MdNavigateNext'
 
 export default function BookSection() {
     return (
-        <section className='container mx-auto px-5 md:px-0 xl:px-20 duration-300 mt-40'>
+        <section className='container mx-auto px-5 md:px-0 xl:px-20 duration-300 mt-20'>
             <button className='group hover:opacity-80 font-black px-3 py-2 my-8 md:mx-0 text-3xl xl:text-4xl 2xl:text-5xl text-primary border-l-8 border-primary tracking-widest flex duration-300'>
                 <h1>Book</h1>
             </button>
@@ -17,7 +17,7 @@ export default function BookSection() {
                         The peripheral (e)motions book by Rebie Ramoso is now available for pre-order. A compilation of narratives from the 13 beautiful women based from the artists' digital artworks. You may place your order only Php 1,500. Get a chance for a book signing with all the writers.
                     </p>
                     <div className='text-center mt-5 lg:text-left'>
-                        <button className='flex items-center px-4 py-2 border-2 border-primary rounded-md w-fit hover:bg-primary hover:text-white duration-300 font-semibold'>
+                        <button className='flex items-center px-4 py-2 rounded-md w-fit bg-primary hover:bg-primary-200 text-white duration-300 font-semibold'>
                             Order now
                             <span className='text-2xl'><MdNavigateNext /></span>
                         </button>
