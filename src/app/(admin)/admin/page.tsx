@@ -3,13 +3,24 @@ import { useState } from "react"
 import Image from "next/image"
 import ProfileForm from "./Profile";
 import DashboardForm from "./Dashboard";
+import WebsiteSettingsForm from "./WebsiteSettings";
+import ShopSettingsForm from "./ShopSettings";
+import PaintingManagementForm from "./PaintingManagement";
+import OrderManagementForm from "./OrderManagement";
+import ManageSlideForm from "./ManageSlide";
+import ServicesForm from "./Services";
+import FAQForm from "./FAQ";
+import RegisterCustomerForm from "./RegisterCustomer";
+import PageSettingsForm from "./PageSettings";
+import SocialMediaForm from "./SocialMedia";
+import SubscriberForm from "./Subscriber";
 
 interface Props {
   displayForm: (ExhibitionsForm: string) => void;
 }
 
 const FirstForm: React.FC<Props> = ({ displayForm }) => {
-  const [activeButton, setActiveButton] = useState<string>('Exhibitions');
+  const [activeButton, setActiveButton] = useState<string>('Dashboard');
 
   const handleButtonClick = (formName: string) => {
     displayForm(formName);
@@ -91,8 +102,8 @@ const FirstForm: React.FC<Props> = ({ displayForm }) => {
         </button>
 
         <button
-          onClick={() => handleButtonClick('RegisterCustomer ')}
-          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'RegisterCustomer ' ? 'bg-white text-primary' : ''
+          onClick={() => handleButtonClick('RegisterCustomer')}
+          className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'RegisterCustomer' ? 'bg-white text-primary' : ''
             }`}
         >
           Register Customer 
@@ -103,7 +114,7 @@ const FirstForm: React.FC<Props> = ({ displayForm }) => {
           className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'PageSettings' ? 'bg-white text-primary' : ''
             }`}
         >
-          PageSettings
+          Page Settings
         </button>
 
         <button
@@ -115,44 +126,13 @@ const FirstForm: React.FC<Props> = ({ displayForm }) => {
         </button>
 
         <button
-          onClick={() => handleButtonClick('Subscriber ')}
+          onClick={() => handleButtonClick('Subscriber')}
           className={`flex items-center px-4 py-2 text-black rounded-md w-fit hover:text-primary duration-300 font-semibold ${activeButton === 'Subscriber' ? 'bg-white text-primary' : ''
             }`}
         >
           Subscriber 
         </button>
       </div>
-    </div>
-  );
-};
-
-
-
-
-
-const WebsiteSettingsForm = () => {
-  return (
-    <div className="w-3/4 bg-white p-4 border-r-2 border-gray rounded-r-lg">
-      <h1 className="text-lg font-semibold mb-4">Website Settings</h1>
-      <p>This is the Website Settings form.</p>
-    </div>
-  );
-};
-
-const ShopSettingsForm = () => {
-  return (
-    <div className="w-3/4 bg-white p-4 border-r-2 border-gray rounded-r-lg">
-      <h1 className="text-lg font-semibold mb-4">Shop Settings Form</h1>
-      <p>This is the Shop Settings form.</p>
-    </div>
-  );
-};
-
-const PaintingManagementForm = () => {
-  return (
-    <div className="w-3/4 bg-white p-4 border-r-2 border-gray rounded-r-lg">
-      <h1 className="text-lg font-semibold mb-4">Painting Management Form</h1>
-      <p>This is the Records form.</p>
     </div>
   );
 };
@@ -165,12 +145,24 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="bg-gray flex h-screen space-x-1">
+    <div className="bg-gray flex h-screen space-x-0">
       <div className="sm:w-6" />
 
       <FirstForm displayForm={displayForm} />
 
       {currentForm === 'Dashboard' && <DashboardForm />}
+      {currentForm === 'WebsiteSettings' && <WebsiteSettingsForm />}
+      {currentForm === 'ShopSettings' && <ShopSettingsForm />}
+      {currentForm === 'PaintingManagement' && <PaintingManagementForm />}
+      {currentForm === 'OrderManagement' && <OrderManagementForm />}
+      {currentForm === 'ManageSlide' && <ManageSlideForm />}
+      {currentForm === 'Services' && <ServicesForm />}
+      {currentForm === 'FAQ' && <FAQForm />}
+      {currentForm === 'RegisterCustomer' && <RegisterCustomerForm />}
+      {currentForm === 'PageSettings' && <PageSettingsForm />}
+      {currentForm === 'SocialMedia' && <SocialMediaForm />}
+      {currentForm === 'Subscriber' && <SubscriberForm />}
+      
 
       <div className="sm:w-6" />
     </div>
