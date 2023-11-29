@@ -6,8 +6,10 @@ import { RiBubbleChartFill } from '@react-icons/all-files/ri/RiBubbleChartFill'
 import { FaUserAstronaut } from '@react-icons/all-files/fa/FaUserAstronaut'
 import { FaPaintBrush } from '@react-icons/all-files/fa/FaPaintBrush'
 import { FaAngleDown } from '@react-icons/all-files/fa/FaAngleDown'
+import { IoCart } from '@react-icons/all-files/io5/IoCart'
 import Link from "next/link"
 import Image from 'next/image'
+import { HiMiniUserGroup } from "@react-icons/all-files/hi2/HiMiniUserGroup"
 
 interface IProps {
   children: React.ReactNode
@@ -23,12 +25,12 @@ export default function AdminLayout({ children }: IProps) {
       current: segment === 'dashboard' || segment === null || segment === undefined,
       icon: <MdDashboard size={28} />
     },
-    {
-      label: 'Exhibitions',
-      href: '/admin/exhibitions',
-      current: segment === 'exhibitions',
-      icon: <RiBubbleChartFill size={28} />
-    },
+    // {
+    //   label: 'Exhibitions',
+    //   href: '/admin/exhibitions',
+    //   current: segment === 'exhibitions',
+    //   icon: <RiBubbleChartFill size={28} />
+    // },
     {
       label: 'Artists',
       href: '/admin/artists',
@@ -36,10 +38,22 @@ export default function AdminLayout({ children }: IProps) {
       icon: <FaUserAstronaut size={28} />
     },
     {
-      label: 'Artworks',
-      href: '/admin/artworks',
-      current: segment === 'artworks',
+      label: 'Paintings',
+      href: '/admin/paintings',
+      current: segment === 'paintings',
       icon: <FaPaintBrush size={28} />
+    },
+    {
+      label: 'Orders',
+      href: '/admin/orders',
+      current: segment === 'orders',
+      icon: <IoCart size={28} />
+    },
+    {
+      label: 'Customers',
+      href: '/admin/customers',
+      current: segment === 'customers',
+      icon: <HiMiniUserGroup size={28} />
     }
   ]
 
