@@ -41,7 +41,7 @@ export default function SideBar() {
         {
             label: 'About',
             href: '/about',
-            current: false
+            current: segment === 'about'
         }
     ]
 

@@ -9,7 +9,7 @@ export default function AddPaintingsButton() {
             <button
                 onClick={() => setIsShow(true)}
                 className='px-4 py-1.5 bg-green-700 hover:bg-green-800 text-white rounded-md'>
-                Add artist
+                Add painting
             </button>
 
             <PaintingsModal

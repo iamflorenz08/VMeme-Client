@@ -1,9 +1,35 @@
+import Image from "next/image";
 import AddPaintingsButton from "./addPaintingsButton";
 
+const getPaintings = async () => {
+    const res = await fetch(`${process.env.API_URI}/api/v1/paintings`)
+    return res.json()
+}
 
-export default function PaintingsPage() {
+interface IPaintings {
+    _id: string,
+    name: string,
+    description: string,
+    imageURL: string,
+    artist: {
+        _id: string,
+        name: string,
+        imageURL: string
+    },
+    type: string,
+    price: number
+}
+
+interface IResult {
+    totalDocuments: 2,
+    page: 1,
+    data: [IPaintings]
+}
+
+export default async function PaintingsPage() {
+    const paintings: IResult = await getPaintings()
     return (
-        <main className='flex flex-col h-full p-8 gap-8'>
+        <main className='flex flex-col h-full p-8 gap-8 overflow-auto'>
             <h1 className='font-medium text-4xl h-fit'>Paintings Page</h1>
             <div className='flex flex-col gap-5 justify-between bg-white shadow-md p-5 rounded-lg'>
 
@@ -20,8 +46,8 @@ export default function PaintingsPage() {
                     <thead className='text-center'>
                         <tr className='bg-primary text-white'>
                             <th className='py-5'></th>
-                            <th className='py-5'>Artist name</th>
                             <th className='py-5'>Painting's name</th>
+                            <th className='py-5'>Artist name</th>
                             <th className='py-5'>Description</th>
                             <th className='py-5'>Type</th>
                             <th className='py-5'>Price</th>
@@ -29,14 +55,22 @@ export default function PaintingsPage() {
                         </tr>
                     </thead>
                     <tbody className='text-center overflow-auto'>
-                        {[1, 2, 3, 4, 5, 312, 321, 321, 3, 213, 12, 321].map((value, index) => (
+                        {paintings.data.map((painting, index) => (
                             <tr key={index} className='odd:bg-white even:bg-primary-100'>
-                                <td className='py-4'>Artist image</td>
-                                <td className='py-4'>Artist name</td>
-                                <td className='py-4'>Painting's name</td>
-                                <td className='py-5'>Description</td>
-                                <td className='py-4'>type</td>
-                                <td className='py-4'>Price</td>
+                                <td className='py-4 flex justify-center w-full '>
+                                    <Image
+                                        className="h-12 w-12 rounded-full object-cover"
+                                        src={painting.imageURL}
+                                        alt="painting"
+                                        height={48}
+                                        width={48}
+                                    />
+                                </td>
+                                <td className='py-4'>{painting.name}</td>
+                                <td className='py-4'>{painting.artist.name}</td>
+                                <td className='py-5'>{painting.description}</td>
+                                <td className='py-4'>{painting.type}</td>
+                                <td className='py-4'>{painting.price}</td>
                                 <td className='py-4'>Actions</td>
                             </tr>
                         ))}
