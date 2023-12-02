@@ -69,10 +69,11 @@ export default function SideBar() {
                 </div>
 
                 <div className="flex items-center justify-center gap-5 ">
-                    <button
+                    <Link
+                        href={'/cart'}
                         className="text-2xl bg-opacity-0 hover:bg-opacity-40 duration-300 flex justify-center items-center bg-gray w-10 h-10 rounded-full">
                         <IoCartOutline />
-                    </button>
+                    </Link>
 
                     {status === 'unauthenticated' && (<button onClick={() => signIn()}>Login</button>)}
                     {status === 'authenticated' && (<ProfileDropDown />)}

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import AddPaintingsButton from "./addPaintingsButton";
+import Link from "next/link";
 
-const getPaintings = async () => {
-    const res = await fetch(`${process.env.API_URI}/api/v1/paintings`)
-    return res.json()
+interface IProps {
+    searchParams: { page: string }
 }
 
 interface IPaintings {
@@ -26,8 +26,15 @@ interface IResult {
     data: [IPaintings]
 }
 
-export default async function PaintingsPage() {
-    const paintings: IResult = await getPaintings()
+const getPaintings = async (page: string | number) => {
+    const res = await fetch(`${process.env.API_URI}/api/v1/paintings?page=${page}`)
+    return res.json()
+}
+
+export default async function PaintingsPage({ searchParams }: IProps) {
+    let page = Number(searchParams.page) || 1
+    const paintings: IResult = await getPaintings(page)
+
     return (
         <main className='flex flex-col h-full p-8 gap-8 overflow-auto'>
             <h1 className='font-medium text-4xl h-fit'>Paintings Page</h1>
@@ -79,10 +86,18 @@ export default async function PaintingsPage() {
 
 
                 <div className='flex justify-between items-center'>
-                    <span>Showing 1 to 10 of 97 results</span>
+                    <span>Showing {((paintings.page - 1) * 10) + 1} to {paintings.page * 10} of {paintings.totalDocuments} results</span>
                     <div className='flex gap-5'>
-                        <button className='bg-primary text-white px-5 py-2 rounded-md'>Previous</button>
-                        <button className='bg-primary text-white px-5 py-2 rounded-md'>Next</button>
+                        <Link
+                            href={'/admin/paintings?page=' + (page > 1 ? page - 1 : 1)}
+                            className='bg-primary text-white px-5 py-2 rounded-md'>
+                            Previous
+                        </Link>
+                        <Link
+                            href={'/admin/paintings?page=' + (page + 1)}
+                            className='bg-primary text-white px-5 py-2 rounded-md'>
+                            Next
+                        </Link>
                     </div>
                 </div>
             </div>

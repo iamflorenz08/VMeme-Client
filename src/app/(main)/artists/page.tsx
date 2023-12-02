@@ -1,7 +1,25 @@
 import Image from "next/image";
 import Link from 'next/link'
 
-export default function ArtistsPage() {
+interface IArtists {
+    _id: string,
+    imageURL: string,
+    name: string,
+    description: string
+}
+interface IResult {
+    totalDocuments: number,
+    page: number
+    data: [IArtists]
+}
+
+const getArtists = async () => {
+    const res = await fetch(`${process.env.API_URI}/api/v1/artist`)
+    return res.json()
+}
+
+export default async function ArtistsPage() {
+    const artists: IResult = await getArtists()
     return (
         <main className="container mx-auto xl:px-20 xl:py-20 flex flex-col gap-10 duration-300 ">
 
@@ -13,26 +31,16 @@ export default function ArtistsPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mx-5 md:mx-0">
-                {[1, 2, 3, 4, 5].map((value, index) => (
+                {artists.data.map((artist, index) => (
                     <div key={index} className="w-full relative flex">
-                        <Image className="object-cover w-full max-h-[450px]" src={'/alaya.webp'} alt="artist" width={800} height={800} />
+                        <Image className="object-cover w-full max-h-[450px]" src={artist.imageURL} alt="artist" width={800} height={800} />
                         <div className="absolute top-0 left-0 bg-black w-full h-full bg-opacity-50 flex flex-col gap-5 items-center justify-center text-white ">
-                            <h1 className="tracking-[10px] text-xl uppercase">Alaya Esguerra</h1>
-                            <Link href={'/artists/123'} className="px-6 py-2 border border-white">View arts</Link>
+                            <h1 className="tracking-[10px] text-xl uppercase">{artist.name}</h1>
+                            <Link href={'/artists/' + (artist._id)} className="px-6 py-2 border border-white">View arts</Link>
                         </div>
                     </div>
                 ))}
             </div>
-            {/* <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 mx-5 md:mx-0">
-                {[1, 2, 3, 4, 5].map((value, index) => (
-                    <button className="flex justify-center hover:scale-110 duration-300">
-                        <div className="bg-white shadow-md p-5 w-fit">
-                            <Image className="object-cover object-top w-[300px] max-h-[375px]" src={'/alaya.webp'} alt="artist" width={800} height={800} />
-                            <h1 className="font-medium mt-3 text-left">Alaya Esguerra</h1>
-                        </div>
-                    </button>
-                ))}
-            </div> */}
 
         </main>
     )
