@@ -21,7 +21,7 @@ export default function CartTable({ itemsInCart }: IProps) {
                         </tr>
                     </thead>
                     <tbody className='text-center overflow-auto'>
-                        {itemsInCart.map((item, index) => (
+                        {itemsInCart?.map((item, index) => (
                             <tr key={index} className='odd:bg-white even:bg-primary-100'>
                                 <td className='py-4 pl-8'>
                                     <section className="px-5 md:px-0 flex flex-col lg:flex-row gap-5 lg:h-[150px]">
@@ -50,7 +50,7 @@ export default function CartTable({ itemsInCart }: IProps) {
                     </tbody>
                 </table>
 
-                {itemsInCart.length <= 0 && (
+                {itemsInCart === undefined || itemsInCart.length <= 0 && (
                     <span className="flex w-full justify-center items-center h-[250px] text-2xl text-gray">
                         No items
                     </span>
@@ -58,7 +58,7 @@ export default function CartTable({ itemsInCart }: IProps) {
             </div >
 
             <div className='flex justify-end mt-5 font-bold'>
-                <span className="text-lg">Total: ₱{itemsInCart.reduce((accumulator, currentItem) => accumulator += currentItem.painting.price, 0)}</span>
+                <span className="text-lg">Total: ₱{itemsInCart?.reduce((accumulator, currentItem) => accumulator += currentItem.painting.price, 0)}</span>
             </div>
 
             <CheckOutButton />

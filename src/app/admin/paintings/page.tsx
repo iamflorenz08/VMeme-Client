@@ -27,7 +27,7 @@ interface IResult {
 }
 
 const getPaintings = async (page: string | number) => {
-    const res = await fetch(`${process.env.API_URI}/api/v1/paintings?page=${page}`)
+    const res = await fetch(`${process.env.API_URI}/api/v1/paintings?page=${page}`, { cache: 'no-store' })
     return res.json()
 }
 

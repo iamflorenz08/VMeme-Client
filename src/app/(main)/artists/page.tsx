@@ -14,7 +14,7 @@ interface IResult {
 }
 
 const getArtists = async () => {
-    const res = await fetch(`${process.env.API_URI}/api/v1/artist`)
+    const res = await fetch(`${process.env.API_URI}/api/v1/artist`, { cache: 'no-cache' })
     return res.json()
 }
 

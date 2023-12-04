@@ -22,7 +22,7 @@ interface IPainting {
 }
 
 const getArtistData = async (artistID: string) => {
-    const res = await fetch(`${process.env.API_URI}/api/v1/artist/${artistID}`)
+    const res = await fetch(`${process.env.API_URI}/api/v1/artist/${artistID}`, { cache: 'no-store' })
     return res.json()
 }
 

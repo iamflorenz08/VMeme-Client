@@ -16,7 +16,7 @@ export default async function CartPage() {
     return (
         <main className='container mx-auto xl:px-20 duration-300 max-h-full overflow-auto'>
             <CartTable
-                itemsInCart={itemsInCart}
+                itemsInCart={itemsInCart || []}
             />
         </main>
     );
