@@ -3,7 +3,6 @@ import AddArtistButton from './addArtistButton'
 import Image from 'next/image'
 import Link from 'next/link'
 const getArtists = async (page?: number) => {
-
     const res = await fetch(`${process.env.API_URI}/api/v1/artist?page=${page}`)
     return res.json()
 }

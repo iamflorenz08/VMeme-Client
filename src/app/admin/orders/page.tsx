@@ -1,5 +1,27 @@
-export default function OrdersPage() {
+import formatStatus from "@/components/formatStatus"
+import { IOrder } from "@/types/orderTypes"
+import { IPainting } from "@/types/paintings"
+import Link from "next/link"
 
+interface IProps {
+    searchParams: { page: number }
+}
+
+interface IOrderResult {
+    totalDocuments: number,
+    page: number
+    data: Array<IOrder>
+}
+
+
+const getOrders = async (page?: number) => {
+    const res = await fetch(`${process.env.API_URI}/api/v1/order?page=${page}`, { cache: 'no-cache' })
+    return res.json()
+}
+
+export default async function OrdersPage({ searchParams }: IProps) {
+    let page = Number(searchParams.page) || 1
+    const orders: IOrderResult = await getOrders(page)
     return (
         <main className='flex flex-col h-full p-8 gap-8'>
             <h1 className='font-medium text-4xl h-fit'>Orders Page</h1>
@@ -25,13 +47,18 @@ export default function OrdersPage() {
                         </tr>
                     </thead>
                     <tbody className='text-center overflow-auto'>
-                        {[1, 2, 3, 4, 5, 312, 321, 321, 3, 213, 12, 321].map((value, index) => (
+                        {orders.data.map((order, index) => (
                             <tr key={index} className='odd:bg-white even:bg-primary-100'>
-                                <td className='py-4'>Order ID</td>
-                                <td className='py-4'>Painting's name</td>
+                                <td className='py-4'>{order._id}</td>
+                                <td className='py-4'>
+                                    {order.orderedPaintings.slice(0, 3).map((painting: IPainting, index: number) => (
+                                        index >= order.orderedPaintings.length - 1 ? painting.name : painting.name + ', '
+                                    ))}
+                                    {order.orderedPaintings.length > 3 && '...'}
+                                </td>
                                 <td className='py-4'>Payment Method</td>
-                                <td className='py-4'>Reference ID</td>
-                                <td className='py-4'>Status</td>
+                                <td className='py-4'>{order.referenceID}</td>
+                                <td className='py-4'>{formatStatus(order.status)}</td>
                                 <td className='py-4'>Actions</td>
                             </tr>
                         ))}
@@ -40,10 +67,18 @@ export default function OrdersPage() {
 
 
                 <div className='flex justify-between items-center'>
-                    <span>Showing 1 to 10 of 97 results</span>
+                    <span>Showing {((orders.page - 1) * 10) + 1} to {orders.page * 10} of {orders.totalDocuments} results</span>
                     <div className='flex gap-5'>
-                        <button className='bg-primary text-white px-5 py-2 rounded-md'>Previous</button>
-                        <button className='bg-primary text-white px-5 py-2 rounded-md'>Next</button>
+                        <Link
+                            href={'/admin/orders?page=' + (page > 1 ? page - 1 : 1)}
+                            className='bg-primary text-white px-5 py-2 rounded-md'>
+                            Previous
+                        </Link>
+                        <Link
+                            href={'/admin/orders?page=' + (page + 1)}
+                            className='bg-primary text-white px-5 py-2 rounded-md'>
+                            Next
+                        </Link>
                     </div>
                 </div>
             </div>
