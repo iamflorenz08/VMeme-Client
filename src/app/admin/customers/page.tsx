@@ -1,5 +1,3 @@
-
-
 export default function CustomersPage() {
     return (
         <main className='flex flex-col h-full p-8 gap-8'>
@@ -12,7 +10,6 @@ export default function CustomersPage() {
                         className='outline-none border border-gray rounded-full px-4 py-1.5'
                         placeholder='Search'
                     />
-                    <button className='px-4 py-1.5 bg-green-700 hover:bg-green-800 text-white rounded-md'>Add painting</button>
                 </div>
 
                 <table className='table-auto w-full border-t border-gray bg-red-200 '>

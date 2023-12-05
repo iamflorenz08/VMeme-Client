@@ -23,6 +23,7 @@ export const signIn = async (prevState: any, formData: FormData) => {
         })
 
         const res = await fetch(`${process.env.API_URI}/api/v1/auth/signin`, {
+            cache: 'no-store',
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -44,7 +45,7 @@ export const signIn = async (prevState: any, formData: FormData) => {
             if (data.message === 'Password doesn\'t match.') {
                 result.password = data.message
             }
-            
+
             return result
         }
 

@@ -4,6 +4,7 @@ import { IState } from "./paintingsModal"
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { storage } from '@/utils/firebaseStorage'
 import { revalidatePath } from 'next/cache'
+import Jimp from 'jimp'
 
 export const addPaintings = async (prevState: any, formData: FormData) => {
     const result: IState = {
@@ -27,13 +28,13 @@ export const addPaintings = async (prevState: any, formData: FormData) => {
             paintingType: formData.get('paintingType'),
             price: Number(formData.get('price'))
         })
-
         const image = formData.get('paintingImageURL') as File
         if (image.type.indexOf('image/') === -1) throw Error('File doesn\'t support or empty.')
+        const watermarkedImage = await getWatermarkedImage(image)
+        if (!watermarkedImage) throw new Error('Failed to watermark image')
         storageRef = ref(storage, 'artists/' + Math.floor(Date.now() / 1000) + image.name)
-        await uploadBytes(storageRef, image)
+        await uploadBytes(storageRef, watermarkedImage)
         const imageURL = await getDownloadURL(storageRef)
-
         const res = await fetch(`${process.env.API_URI}/api/v1/paintings`, {
             method: 'POST',
             headers: {
@@ -77,4 +78,25 @@ export const addPaintings = async (prevState: any, formData: FormData) => {
     }
 
     return result
+}
+
+const getWatermarkedImage = async (image: File) => {
+    try {
+        const buffer = Buffer.from(await image.arrayBuffer())
+        const mainImage = await Jimp.read(buffer)
+        const watermarkImage = await Jimp.read('public/vmeme_logo.jpg')
+        await watermarkImage.resize(200, Jimp.AUTO);
+        const x = (mainImage.bitmap.width - watermarkImage.bitmap.width) / 2;
+        const y = (mainImage.bitmap.height - watermarkImage.bitmap.height) / 2;
+        await mainImage.composite(watermarkImage, x, y, {
+            mode: Jimp.BLEND_SOURCE_OVER,
+            opacitySource: 0.5,
+            opacityDest: 1.0
+        })
+        await mainImage.quality(100)
+        return mainImage.getBufferAsync(Jimp.MIME_PNG)
+    } catch (e) {
+        console.log(e)
+        return null
+    }
 }

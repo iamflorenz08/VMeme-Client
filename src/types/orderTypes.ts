@@ -11,7 +11,9 @@ export interface IOrder {
     referenceID: string,
     orderedPaintings: [IPainting] | any,
     status: string,
-    createdAt: Date
+    createdAt: Date,
+    confirmedDate?: Date,
+    completedDate?: Date
 }
 
 export enum IOrderStatus {

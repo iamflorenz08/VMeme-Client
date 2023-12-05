@@ -81,11 +81,11 @@ export default function AdminLayout({ children }: IProps) {
           ))}
         </ul>
       </nav>
-
+            
       <div className="flex flex-col bg-[#F9FAFC] w-full">
         <nav className="bg-white p-8 flex justify-end shadow-md z-40">
           <div className="flex items-center gap-3">
-            Florenz De Jesus
+            Sabrina Nieva
             <FaAngleDown />
           </div>
         </nav>

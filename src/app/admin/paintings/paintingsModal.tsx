@@ -24,8 +24,22 @@ const initialState: IState = {
     message: null,
 }
 
-export default function PaintingsModal({ isShow, showCallback }: IProps) {
+const SubmitButton = () => {
     const { pending } = useFormStatus()
+
+    console.log(pending)
+    return (
+        <button
+            disabled={pending}
+            type='submit'
+            className='px-6 py-2 bg-green-600 rounded-md hover:bg-green-700 duration-300'>
+            {pending ? 'Loading' : 'Add'}
+        </button>
+    )
+}
+
+export default function PaintingsModal({ isShow, showCallback }: IProps) {
+
     const [status, formAction] = useFormState(addPaintings, initialState)
 
     useEffect(() => {
@@ -91,12 +105,7 @@ export default function PaintingsModal({ isShow, showCallback }: IProps) {
                     {/* DIVIDER */}
                     <div className='border border-gray'></div>
                     <div className='flex justify-end gap-3 text-white'>
-                        <button
-                            disabled={pending}
-                            type='submit'
-                            className='px-6 py-2 bg-green-600 rounded-md hover:bg-green-700 duration-300'>
-                            Add
-                        </button>
+                        <SubmitButton />
                         <button
                             onClick={() => showCallback(false)}
                             type='button'

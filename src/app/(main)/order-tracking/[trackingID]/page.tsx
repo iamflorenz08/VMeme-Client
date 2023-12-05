@@ -3,19 +3,12 @@ import { AiOutlineFileDone } from '@react-icons/all-files/ai/AiOutlineFileDone'
 import { MdOutlineDoneOutline } from '@react-icons/all-files/md/MdOutlineDoneOutline'
 import { IOrder } from '@/types/orderTypes';
 import { IPainting } from '@/types/paintings';
+import getFormattedDate from '@/utils/getFormattedDate';
 import Image from 'next/image';
 
 interface IProps {
   params: { trackingID: string }
 }
-
-// Sample data for table updates
-const updatesData = [
-  { date: '11/29/2023 - 8:31PM', location: 'Taguig City', event: 'Order Placed' },
-  { date: '11/29/2023 - 8:31PM', location: 'Taguig City', event: 'Order Confirmed' },
-  { date: '11/29/2023 - 8:31PM', location: 'Taguig City', event: 'Order Completed' },
-  // Add more rows as needed
-];
 
 const getOrder = async (orderID: string | undefined) => {
   const res = await fetch(`${process.env.API_URI}/api/v1/order/detail/${orderID}`, { cache: 'no-cache' })
@@ -25,12 +18,6 @@ const getOrder = async (orderID: string | undefined) => {
 export default async function TrackingIDPage({ params }: IProps) {
   const order: IOrder = await getOrder(params.trackingID)
 
-  // Dynamic array of steps based on the number of rows in updatesData
-  const steps = updatesData.map((update, index) => ({
-    label: update.event,
-    date: update.date,
-    progress: `${((index + 1) / updatesData.length) * 100}%`,
-  }));
 
   return (
     <main className='container mx-auto xl:px-20 duration-300 mb-20'>
@@ -41,12 +28,14 @@ export default async function TrackingIDPage({ params }: IProps) {
         {/* Stepper Circles and Connections */}
 
         <ul className="flex justify-between items-center w-full px-7 my-2" >
-          <li className='flex items-center w-full after:w-full after:content-[""] after:border-4 after:border-primary after:items-center'>
+          <li className={`flex items-center w-full after:w-full 
+          after:content-[""] after:border-4 ${order.confirmedDate ? 'after:border-primary' : 'after:border-gray'} after:items-center`}>
             <span className='text-white bg-primary p-4 rounded-full flex items-center justify-center'>
               <PiListMagnifyingGlassBold size={25} />
             </span>
           </li>
-          <li className='flex items-center w-full after:w-full after:content-[""] after:border-4 after:border-gray after:items-center'>
+          <li className={`flex items-center w-full after:w-full 
+          after:content-[""] after:border-4 ${order.completedDate ? 'after:border-primary' : 'after:border-gray'} after:items-center`}>
             <span className='text-white bg-primary p-4 rounded-full flex items-center justify-center'>
               <AiOutlineFileDone size={25} />
             </span>
@@ -60,12 +49,20 @@ export default async function TrackingIDPage({ params }: IProps) {
 
         {/* Stepper Labels */}
         <div className="flex w-full justify-between">
-          {steps.map((step, index) => (
-            <div key={index} className="flex flex-col items-center text-center">
-              <span className="text-xs text-gray-500">{step.date}</span>
-              <span className="text-sm">{step.label}</span>
-            </div>
-          ))}
+          <div className="flex flex-col items-center text-center">
+            <span className="text-xs text-gray-500">{getFormattedDate(order.createdAt)}</span>
+            <span className="text-sm">Order Placed</span>
+          </div>
+
+          <div className="flex flex-col items-center text-center">
+            <span className="text-xs text-gray-500">{order.confirmedDate && getFormattedDate(order.confirmedDate)}</span>
+            <span className="text-sm">Order Confirmed</span>
+          </div>
+
+          <div className="flex flex-col items-center text-center">
+            <span className="text-xs text-gray-500">11/29/2023 - 8:31PM</span>
+            <span className="text-sm">Order Completed</span>
+          </div>
         </div>
       </div>
 
