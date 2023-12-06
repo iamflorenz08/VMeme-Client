@@ -1,5 +1,6 @@
 import { FaFacebookSquare } from '@react-icons/all-files/fa/FaFacebookSquare'
 import { RiInstagramFill } from '@react-icons/all-files/ri/RiInstagramFill'
+import Link from 'next/link'
 
 export default function Footer() {
     return (
@@ -10,8 +11,14 @@ export default function Footer() {
                 </span>
                 <span className='flex items-center gap-2'>
                     | Alabang and Pasig City, Philippines |
-                    <button className='text-xl'><FaFacebookSquare /></button>
-                    <button className='text-xl'><RiInstagramFill /></button>
+                    <Link
+                        href={'https://www.facebook.com/VMemeContemporaryArtGallery?mibextid=LQQJ4d'}
+                        className='text-xl'>
+                        <FaFacebookSquare />
+                    </Link>
+                    <Link
+                        href={'https://instagram.com/vmeme_contemporary?igshid=NGVhN2U2NjQ0Yg=='}
+                        className='text-xl'><RiInstagramFill /></Link>
                 </span>
             </div>
         </footer>
