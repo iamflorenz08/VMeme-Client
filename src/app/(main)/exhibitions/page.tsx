@@ -1,3 +1,5 @@
+import { MdNavigateNext } from "@react-icons/all-files/md/MdNavigateNext";
+import { GrFormPrevious } from "@react-icons/all-files/gr/GrFormPrevious";
 import Image from "next/image";
 
 interface IExhibits {
@@ -51,6 +53,22 @@ export default function page() {
                     </div>
                 ))}
             </div >
+
+            <div className="flex justify-between">
+                <button className='group hover:opacity-80 font-black px-3 py-2 my-14 text-xl xl:text-2xl 2xl:text-3xl text-primary border-4 border-primary tracking-widest flex duration-300'>
+                <span className='opacity-0 group-hover:opacity-100 translate-x-6 group-hover:translate-x-0 duration-300'>
+                    <GrFormPrevious />
+                    </span>
+                    <h1>Prev Exhibitions</h1>
+                </button>
+
+                <button className='group hover:opacity-80 font-black px-3 py-2 my-14 text-xl xl:text-2xl 2xl:text-3xl text-primary border-4 border-primary tracking-widest flex duration-300'>
+                    <h1>Next Exhibitions</h1>
+                    <span className='opacity-0 group-hover:opacity-100 translate-x-6 group-hover:translate-x-0 duration-300'>
+                    <MdNavigateNext />
+                    </span>
+                </button>
+            </div>
         </main >
     )
 }
