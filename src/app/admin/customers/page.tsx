@@ -1,4 +1,21 @@
-export default function CustomersPage() {
+import { IUser } from "@/types/userTypes"
+import getFormattedDate from "@/utils/getFormattedDate"
+import Image from "next/image"
+
+const getUsers = async () => {
+    const res = await fetch(`${process.env.API_URI}/api/v1/user`, { cache: 'no-cache' })
+    return res.json()
+}
+
+interface IResult {
+    totalDocuments: number,
+    page: number,
+    data: Array<IUser>
+}
+
+export default async function CustomersPage() {
+    const users: IResult = await getUsers()
+
     return (
         <main className='flex flex-col h-full p-8 gap-8'>
             <h1 className='font-medium text-4xl h-fit'>Customers Page</h1>
@@ -15,21 +32,19 @@ export default function CustomersPage() {
                 <table className='table-auto w-full border-t border-gray bg-red-200 '>
                     <thead className='text-center'>
                         <tr className='bg-primary text-white'>
-                            <th className='py-5'></th>
-                            <th className='py-5'>Artist name</th>
-                            <th className='py-5'>Painting's name</th>
-                            <th className='py-5'>Price</th>
-                            <th className='py-5'>Actions</th>
+                            <th className='py-5'>Email</th>
+                            <th className='py-5'>First name</th>
+                            <th className='py-5'>Last name</th>
+                            <th className='py-5'>Created at</th>
                         </tr>
                     </thead>
                     <tbody className='text-center overflow-auto'>
-                        {[1, 2, 3, 4, 5, 312, 321, 321, 3, 213, 12, 321].map((value, index) => (
+                        {users.data.map((user, index) => (
                             <tr key={index} className='odd:bg-white even:bg-primary-100'>
-                                <td className='py-4'>Artist image</td>
-                                <td className='py-4'>Artist name</td>
-                                <td className='py-4'>Painting's name</td>
-                                <td className='py-4'>Price</td>
-                                <td className='py-4'>Actions</td>
+                                <td className='py-4'>{user.email}</td>
+                                <td className='py-4'>{user.fullName.first}</td>
+                                <td className='py-4'>{user.fullName.last}</td>
+                                <td className='py-4'>{getFormattedDate(user.createdAt)}</td>
                             </tr>
                         ))}
                     </tbody>

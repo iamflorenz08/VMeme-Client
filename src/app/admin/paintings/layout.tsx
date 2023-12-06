@@ -1,6 +1,11 @@
 interface IProps {
     children: React.ReactNode
 }
+
+export const metadata = {
+    title: "Paintings",
+};
+
 export default function layout({children}: IProps) {
     return (
         <>{children}</>

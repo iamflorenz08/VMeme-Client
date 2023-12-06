@@ -1,10 +1,12 @@
 import useDropDown from "@/hooks/useDropDown"
+import { IPainting } from "@/types/paintings"
 import Image from "next/image"
 import { useRef, useState, useEffect } from "react"
 
 interface IProps {
     id: string,
-    name: string
+    name: string,
+    painting?: IPainting
 }
 
 interface IArtist {
@@ -13,7 +15,7 @@ interface IArtist {
     imageURL: string,
 }
 
-export default function ArtistNamesInput({ id, name }: IProps) {
+export default function ArtistNamesInput({ id, name, painting }: IProps) {
     const ref = useRef<any>()
     const [search, setSearch] = useState<string>()
     const [artists, setArtists] = useState<Array<IArtist>>([])
@@ -43,7 +45,7 @@ export default function ArtistNamesInput({ id, name }: IProps) {
                 type="text"
                 className="w-full px-3 py-3 outline-none rounded-md border border-gray disabled:bg-white"
                 readOnly
-                value={selectedArtist?.name || ''}
+                value={selectedArtist?.name || painting?.artist.name || ''}
                 onClick={() => setToggle(true)}
                 placeholder="Select artists"
             />
@@ -52,7 +54,7 @@ export default function ArtistNamesInput({ id, name }: IProps) {
                 type="hidden"
                 name={name}
                 id={id}
-                value={selectedArtist?._id || ''}
+                value={selectedArtist?._id || painting?.artist._id || ''}
             />
 
             {toggle && (

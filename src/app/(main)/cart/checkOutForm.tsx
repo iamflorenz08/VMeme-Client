@@ -2,7 +2,8 @@ import { ICart } from "@/types/cartType"
 import { IStatus } from "@/types/statusTypes"
 import { useFormState, useFormStatus } from "react-dom"
 import { completeCheckOut } from "./action"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import Image from "next/image"
 
 interface IProps {
     cartItems: Array<ICart> | undefined,
@@ -29,7 +30,7 @@ const initialState: ICheckOutStatus = {
 export default function CheckOutForm({ onCancel: cancel, cartItems }: IProps) {
     const { pending } = useFormStatus()
     const [status, formAction] = useFormState(completeCheckOut, initialState)
-    console.log(status)
+    const [paymentType, setPaymentType] = useState<string>('GCash')
     useEffect(() => {
         if (status.success) {
             status.success = false
@@ -47,14 +48,26 @@ export default function CheckOutForm({ onCancel: cancel, cartItems }: IProps) {
             </div>
 
             <span className='flex gap-3 text-lg font-mediums'>
-                <button type='button' className='border-b-2 border-primary'>GCash</button>
-                <button type='button'>BPI</button>
+                <button
+                    onClick={() => setPaymentType('GCash')}
+                    type='button'
+                    className={`${paymentType === 'GCash' && 'border-b-2 border-primary'}`}>GCash</button>
+                <button
+                    onClick={() => setPaymentType('BPI')}
+                    className={`${paymentType === 'BPI' && 'border-b-2 border-primary'}`}
+                    type='button'>BPI</button>
+
+                <input type="hidden" name="paymentMethods" value={paymentType} />
             </span>
 
             <h2>Amount to pay - <span className='font-bold'>₱{cartItems?.reduce((accumulator, cartItem) => accumulator += cartItem.painting.price, 0)}</span></h2>
-            <div className='h-80 w-80 bg-gray'>
+            {paymentType === 'GCash' ? (
+                <Image className='h-80 w-80 bg-gray' src={'/gcash.png'} alt="qr" height={500} width={500} />
+            ) : (
+                <Image className='h-80 w-80 bg-gray' src={'/bpi.png'} alt="qr" height={500} width={500} />
+            )}
 
-            </div>
+
 
             <input type="text" name="referenceID" className='p-3 w-full text-lg border border-gray rounded-md outline-primary' placeholder='Reference ID' />
 

@@ -1,11 +1,13 @@
 import { useFormState, useFormStatus } from "react-dom"
 import ArtistNamesInput from "./artistNamesInput"
 import ImagePreview from "./imagePreview"
-import { addPaintings } from "./action"
+import { addPaintings, updatePainting } from "./action"
 import { useEffect } from "react"
+import { IPainting } from "@/types/paintings"
 interface IProps {
     isShow: boolean,
-    showCallback: (value: boolean) => void
+    showCallback: (value: boolean) => void,
+    painting?: IPainting
 }
 
 export interface IState {
@@ -26,8 +28,6 @@ const initialState: IState = {
 
 const SubmitButton = () => {
     const { pending } = useFormStatus()
-
-    console.log(pending)
     return (
         <button
             disabled={pending}
@@ -38,24 +38,27 @@ const SubmitButton = () => {
     )
 }
 
-export default function PaintingsModal({ isShow, showCallback }: IProps) {
-
+export default function PaintingsModal({ isShow, showCallback, painting }: IProps) {
     const [status, formAction] = useFormState(addPaintings, initialState)
-
+    const [updateStatus, updateAction] = useFormState(updatePainting, initialState)
+    console.log(updateStatus)
     useEffect(() => {
-        if (status.success) {
+        if (status.success || updateStatus.success) {
             status.success = false
             status.message = null
+            updateStatus.success = false
+            updateStatus.message = null
             showCallback(false)
         }
-    }, [status])
+    }, [status, updateStatus])
 
     if (!isShow) return null
     return (
         <div className=" bg-black bg-opacity-50 absolute top-0 left-0 z-50 h-full w-full flex items-center justify-center">
             <div className="bg-white w-[600px] p-5 rounded-lg flex flex-col gap-5">
                 <h1 className="font-medium text-2xl">Details</h1>
-                <form action={formAction} className='flex flex-col gap-5'>
+                <form action={painting ? updateAction : formAction} className='flex flex-col gap-5'>
+                    <input type="hidden" name="paintingId" defaultValue={painting?._id} />
                     <div className='flex justify-between gap-5 '>
                         <div className='flex flex-col gap-5 w-full '>
                             <input
@@ -63,6 +66,7 @@ export default function PaintingsModal({ isShow, showCallback }: IProps) {
                                 className="min-w-full px-3 py-3 outline-none rounded-md border border-gray"
                                 name="paintingName"
                                 id="paintingName"
+                                defaultValue={painting?.name}
                                 placeholder="Painting's Name"
                             />
 
@@ -70,23 +74,28 @@ export default function PaintingsModal({ isShow, showCallback }: IProps) {
                                 placeholder='Description'
                                 name="description"
                                 id="description"
+                                defaultValue={painting?.description}
                                 className='w-full h-full  px-3 py-3 outline-none rounded-md border border-gray' />
                         </div>
 
                         <ImagePreview
                             id="paintingImageURL"
                             name="paintingImageURL"
+                            imageURL={painting?.imageURL}
                         />
+
                     </div>
 
                     <div className="flex gap-5">
                         <ArtistNamesInput
                             id="artistId"
                             name="artistId"
+                            painting={painting}
                         />
 
                         <select
                             name="paintingType"
+                            defaultValue={painting?.type}
                             className="w-full px-3 py-3 outline-none rounded-md border border-gray">
                             <option value="">Select type</option>
                             <option value="artist">Artist</option>
@@ -99,6 +108,7 @@ export default function PaintingsModal({ isShow, showCallback }: IProps) {
                         className="min-w-full px-3 py-3 outline-none rounded-md border border-gray"
                         name="price"
                         id="price"
+                        defaultValue={painting?.price}
                         placeholder="Price"
                     />
 

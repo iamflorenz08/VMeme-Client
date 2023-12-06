@@ -1,11 +1,9 @@
 import Image from "next/image";
 import { IoMdHeartEmpty } from '@react-icons/all-files/io/IoMdHeartEmpty'
-import { FiArrowLeft } from '@react-icons/all-files/fi/FiArrowLeft'
-import { FiArrowRight } from '@react-icons/all-files/fi/FiArrowRight'
-import { IPainting } from "@/types/paintings";
 import AddToCartButton from "./addToCartButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { IPainting, PaintingStatus } from "@/types/paintings";
 
 interface IProps {
     params: { paintingID: string }
@@ -24,7 +22,7 @@ const isPaintingAddedToCart = async (userID: string, paintingID: string) => {
 
 export default async function PaintingPage({ params }: IProps) {
     const session = await getServerSession(authOptions)
-    const [painting, isAdded] = await Promise.all(
+    const [painting, isAdded]: [IPainting, boolean] = await Promise.all(
         [
             getPainting(params.paintingID),
             session ? isPaintingAddedToCart(session.user._id, params.paintingID) : false
@@ -55,10 +53,13 @@ export default async function PaintingPage({ params }: IProps) {
                     </div>
 
                     <div className="flex gap-5">
-                        <AddToCartButton
-                            isInCart={isAdded}
-                            paintingID={params.paintingID}
-                        />
+                        {painting.status === PaintingStatus.Available && (
+                            <AddToCartButton
+                                isInCart={isAdded}
+                                paintingID={params.paintingID}
+                            />
+                        )}
+
                         <button className="flex-none border px-10 py-4 duration-300 flex items-center gap-1 hover:bg-primary-200 hover:text-white">
                             Wishlist
                             <IoMdHeartEmpty size={18} />

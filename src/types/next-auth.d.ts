@@ -9,6 +9,7 @@ declare module "next-auth" {
                 first: string,
                 last: string
             }
+            role?: string
         },
     }
 }

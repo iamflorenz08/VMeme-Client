@@ -21,7 +21,7 @@ export default async function TrackingIDPage({ params }: IProps) {
 
   return (
     <main className='container mx-auto xl:px-20 duration-300 mb-20'>
-      <h1 className='font-medium text-2xl text-center'>Order Details - abc</h1>
+      <h1 className='font-medium text-2xl text-center'>Order Details - {order.referenceID}</h1>
 
       {/* Stepper and Progress Bar */}
       <div className="flex items-center flex-col justify-center relative">
@@ -34,34 +34,52 @@ export default async function TrackingIDPage({ params }: IProps) {
               <PiListMagnifyingGlassBold size={25} />
             </span>
           </li>
-          <li className={`flex items-center w-full after:w-full 
+          {order.status !== 'Declined' && (
+            <li className={`flex items-center w-full after:w-full 
           after:content-[""] after:border-4 ${order.completedDate ? 'after:border-primary' : 'after:border-gray'} after:items-center`}>
-            <span className='text-white bg-primary p-4 rounded-full flex items-center justify-center'>
-              <AiOutlineFileDone size={25} />
-            </span>
-          </li>
+              <span className='text-white bg-primary p-4 rounded-full flex items-center justify-center'>
+                <AiOutlineFileDone size={25} />
+              </span>
+            </li>
+          )}
+
           <li className='flex items-center'>
-            <span className='text-white bg-primary p-4 rounded-full flex items-center justify-center'>
+            <span className={`text-white ${order.status === 'Declined' ? 'bg-red-500' : 'bg-primary'} p-4 rounded-full flex items-center justify-center`}>
               <MdOutlineDoneOutline size={25} />
             </span>
           </li>
         </ul>
 
         {/* Stepper Labels */}
-        <div className="flex w-full justify-between">
-          <div className="flex flex-col items-center text-center">
+        <div className="flex w-full justify-between ">
+          <div className="flex flex-col items-center w-32 ">
             <span className="text-xs text-gray-500">{getFormattedDate(order.createdAt)}</span>
             <span className="text-sm">Order Placed</span>
           </div>
+          
+          {order.status !== 'Declined' && (
+            <div className="flex flex-col items-center text-center w-32 ">
+              {order.confirmedDate ? (
+                <>
+                  <span className="text-xs text-gray-500">{getFormattedDate(order.confirmedDate)}</span>
+                  <span className="text-sm">Order Confirmed</span>
+                </>
+              ) : (
+                'N/A'
+              )}
+            </div>
+          )}
+          
+          <div className="flex flex-col items-center w-32 ">
+            {order.completedDate ? (
+              <>
+                <span className="text-xs text-gray-500">{getFormattedDate(order.completedDate)}</span>
+                <span className="text-sm">Order {order.status}</span>
+              </>
+            ) : (
+              'N/A'
+            )}
 
-          <div className="flex flex-col items-center text-center">
-            <span className="text-xs text-gray-500">{order.confirmedDate && getFormattedDate(order.confirmedDate)}</span>
-            <span className="text-sm">Order Confirmed</span>
-          </div>
-
-          <div className="flex flex-col items-center text-center">
-            <span className="text-xs text-gray-500">11/29/2023 - 8:31PM</span>
-            <span className="text-sm">Order Completed</span>
           </div>
         </div>
       </div>

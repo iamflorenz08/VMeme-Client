@@ -5,7 +5,7 @@ const getFormattedDate = (date: Date): string => {
     const year = newDate.getFullYear()
     const hours = newDate.getHours() < 10 ? '0' + (newDate.getHours() + 1) : newDate.getHours()
     const minutes = newDate.getMinutes() < 10 ? '0' + (newDate.getMinutes() + 1) : newDate.getMinutes()
-    return String(month + '/' + day + '/' + year + ' ' + hours + ':' + minutes)
+    return String(month + '/' + day + '/' + year + ' - ' + hours + ':' + minutes)
 }
 
 

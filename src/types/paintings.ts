@@ -1,5 +1,10 @@
 import { IArtist } from "./artists";
 
+export enum PaintingStatus {
+    Available = 'Available',
+    Sold = 'Sold'
+}
+
 export interface IPainting {
     _id: string,
     name: string,
@@ -7,5 +12,6 @@ export interface IPainting {
     imageURL: string,
     artist: IArtist,
     type: string,
-    price: number
+    price: number,
+    status: string
 }

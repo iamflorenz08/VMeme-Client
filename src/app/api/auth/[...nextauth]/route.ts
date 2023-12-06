@@ -28,6 +28,7 @@ export const authOptions: NextAuthOptions = {
                 })
 
                 const data = await res.json()
+                console.log(data)
                 if (!res.ok) {
                     if (!data.success) throw new Error(data.message)
                     throw new Error(res.statusText)
@@ -38,7 +39,6 @@ export const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         async signIn() {
-            console.log('hi')
             cookies().delete('otp-email')
             return true
         },

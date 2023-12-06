@@ -9,30 +9,42 @@ interface IDashboard {
     bgColor: string,
 }
 
-export default function DashboardPage() {
+interface IDocumentCounts {
+    artistCount: number,
+    paintingCount: number,
+    pendingOrdersCount: number,
+    customerCount: number
+}
 
+const getDocumentCount = async () => {
+    const res = await fetch(`${process.env.API_URI}/api/v1/dashboard`, { cache: 'no-cache' })
+    return res.json()
+}
+
+export default async function DashboardPage() {
+    const documentCounts: IDocumentCounts = await getDocumentCount()
     const summaryList: IDashboard[] = [
         {
             label: 'Artists',
-            count: 12,
+            count: documentCounts.artistCount,
             bgColor: 'bg-blue-500',
             icon: <FaPaintbrush className="text-black opacity-30" size={120} />
         },
         {
             label: 'Paintings',
-            count: 12,
+            count: documentCounts.paintingCount,
             bgColor: 'bg-pink-500',
             icon: <AiOutlineProfile className="text-black opacity-30" size={120} />
         },
         {
             label: 'Pending Orders',
-            count: 5,
+            count: documentCounts.pendingOrdersCount,
             bgColor: 'bg-green-500',
             icon: <MdPendingActions className="text-black opacity-30" size={120} />
         },
         {
             label: 'Registered Customers',
-            count: 5,
+            count: documentCounts.customerCount,
             bgColor: 'bg-sky-500',
             icon: <HiMiniUserGroup className="text-black opacity-30" size={120} />
         }

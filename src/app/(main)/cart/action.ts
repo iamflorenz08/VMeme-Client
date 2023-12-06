@@ -54,6 +54,7 @@ export const completeCheckOut = async (prevState: any, formData: FormData) => {
                 address,
                 zipCode,
                 referenceID,
+                paymentMethods: formData.get('paymentMethods')
             })
         })
 

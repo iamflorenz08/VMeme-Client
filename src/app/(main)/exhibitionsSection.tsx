@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { MdNavigateNext } from '@react-icons/all-files/md/MdNavigateNext'
+import Link from 'next/link'
 export default function ExhibitionsSection() {
     return (
         <section className='container mx-auto xl:px-20 duration-300'>
@@ -14,12 +15,14 @@ export default function ExhibitionsSection() {
                 <div className="bg-black absolute top-0 w-full h-full opacity-75"></div>
             </div>
 
-            <button className='group hover:opacity-80 font-black px-3 py-2 my-8 mx-5 md:mx-0 text-3xl xl:text-4xl 2xl:text-5xl text-primary border-l-8 border-primary tracking-widest flex duration-300'>
+            <Link
+                href={'/exhibitions'}
+                className='group hover:opacity-80 font-black px-3 py-2 my-8 mx-5 md:mx-0 text-3xl xl:text-4xl 2xl:text-5xl text-primary border-l-8 border-primary tracking-widest flex duration-300'>
                 <h1>Exhibitions</h1>
                 <span className='opacity-0 group-hover:opacity-100 translate-x-6 group-hover:translate-x-0 duration-300'>
                     <MdNavigateNext />
                 </span>
-            </button>
+            </Link>
 
             <div className='flex flex-col gap-20 justify-center px-5 md:px-0  items-center'>
 
@@ -59,7 +62,11 @@ export default function ExhibitionsSection() {
                     </div>
                 </div>
 
-                <button className='w-fit text-primary text-xl font-bold border-b-2 border-primary duration-300 hover:opacity-80 hover:border-opacity-80'>View all</button>
+                <Link
+                    href={'/exhibitions'}
+                    className='w-fit text-primary text-xl font-bold border-b-2 border-primary duration-300 hover:opacity-80 hover:border-opacity-80'>
+                    View all
+                </Link>
             </div>
         </section>
     )
