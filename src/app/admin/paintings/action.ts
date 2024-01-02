@@ -156,7 +156,7 @@ const getWatermarkedImage = async (image: File) => {
     try {
         const buffer = Buffer.from(await image.arrayBuffer())
         const mainImage = await Jimp.read(buffer)
-        const watermarkImage = await Jimp.read('public/vmeme_logo.jpg')
+        const watermarkImage = await Jimp.read('./src/images/vmeme_logo.jpg')
         await watermarkImage.resize(200, Jimp.AUTO);
         const x = (mainImage.bitmap.width - watermarkImage.bitmap.width) / 2;
         const y = (mainImage.bitmap.height - watermarkImage.bitmap.height) / 2;
