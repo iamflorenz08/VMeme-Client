@@ -1,5 +1,5 @@
 'use server'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from '@/utils/authOption'
 import { getServerSession } from 'next-auth'
 import { revalidatePath } from 'next/cache'
 import z from 'zod'

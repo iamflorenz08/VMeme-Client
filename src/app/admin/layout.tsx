@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import AdminSidebar from "./adminSidebar"
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../api/auth/[...nextauth]/route'
+import { authOptions } from '@/utils/authOption'
 import { redirect } from 'next/navigation'
 import ProfileDropDown from './profileDropDown'
 interface IProps {

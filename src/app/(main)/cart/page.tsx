@@ -1,6 +1,6 @@
 
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/utils/authOption";
 import { ICart } from "@/types/cartType";
 import CartTable from "./cartTable";
 

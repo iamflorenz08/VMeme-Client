@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/utils/authOption";
 import { status } from "@/components/formatStatus";
 import { IOrder } from "@/types/orderTypes";
 import { getServerSession } from "next-auth";

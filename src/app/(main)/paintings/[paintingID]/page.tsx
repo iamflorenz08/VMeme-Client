@@ -2,7 +2,7 @@ import Image from "next/image";
 import { IoMdHeartEmpty } from '@react-icons/all-files/io/IoMdHeartEmpty'
 import AddToCartButton from "./addToCartButton";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/utils/authOption";
 import { IPainting, PaintingStatus } from "@/types/paintings";
 
 interface IProps {
