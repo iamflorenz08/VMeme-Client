@@ -22,7 +22,7 @@ export default function VerifyOTP() {
             const credentials = await signIn('credentials', {
                 otp: data.otp,
                 redirect: false,
-                callbackUrl: 'http://localhost:3000'
+                callbackUrl: '/'
             })
 
             if (!credentials?.ok) return setError(credentials?.error)
