@@ -61,9 +61,9 @@ import { cookies } from 'next/headers'
 //     }
 // }
 
-const handler: NextApiHandler = (req: NextApiRequest, res: NextApiResponse) => {
-    return NextAuth(req, res, authOptions)
-}
+// const handler: NextApiHandler = (req: NextApiRequest, res: NextApiResponse) => {
+//     return NextAuth(req, res, authOptions)
+// }
 
-
+const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST }
