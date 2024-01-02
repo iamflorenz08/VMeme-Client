@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import formatStatus from "@/components/formatStatus";
+import { status } from "@/components/formatStatus";
 import { IOrder } from "@/types/orderTypes";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
@@ -42,7 +42,7 @@ export default async function OrderTrackingPage() {
                                 <td className='py-4'>{order.referenceID}</td>
                                 <td className='py-4'>{getFormattedDate(order.createdAt)}</td>
                                 <td className='py-4'>
-                                    {formatStatus(order.status)}
+                                    {status(order.status)}
                                 </td>
                                 <td className='py-4'>
                                     <Link href={'/order-tracking/' + order._id} className="text-primary underline" >View Details</Link>

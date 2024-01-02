@@ -14,7 +14,7 @@ export default function BookSection() {
                 <div className='flex flex-col gap-3 xl:gap-5 2xl:gap-7 lg:w-3/4'>
                     <h1 className='font-bold text-2xl 2xl:text-3xl'>Peripheral (e)motions</h1>
                     <p className='text-justify font-light 2xl:text-lg'>
-                        The peripheral (e)motions book by Rebie Ramoso is now available for pre-order. A compilation of narratives from the 13 beautiful women based from the artists' digital artworks. You may place your order only Php 1,500. Get a chance for a book signing with all the writers.
+                        The peripheral (e)motions book by Rebie Ramoso is now available for pre-order. A compilation of narratives from the 13 beautiful women based from the artists digital artworks. You may place your order only Php 1,500. Get a chance for a book signing with all the writers.
                     </p>
                     <div className='text-center mt-5 lg:text-left'>
                         <button className='flex items-center px-4 py-2 rounded-md w-fit bg-primary hover:bg-primary-200 text-white duration-300 font-semibold'>

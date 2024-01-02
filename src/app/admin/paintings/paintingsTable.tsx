@@ -18,7 +18,7 @@ export default function PaintingsTable({ paintings }: IProps) {
                 <thead className='text-center'>
                     <tr className='bg-primary text-white'>
                         <th className='py-5'></th>
-                        <th className='py-5'>Painting's name</th>
+                        <th className='py-5'>Painting&apos;s name</th>
                         <th className='py-5'>Artist name</th>
                         <th className='py-5'>Description</th>
                         <th className='py-5'>Type</th>

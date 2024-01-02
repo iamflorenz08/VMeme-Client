@@ -1,6 +1,6 @@
 'use client'
 import { IOrder } from "@/types/orderTypes"
-import formatStatus from "@/components/formatStatus"
+import { status } from "@/components/formatStatus"
 import { IPainting } from "@/types/paintings"
 import { useState } from "react"
 import OrdersModal from "./ordersModal"
@@ -19,7 +19,7 @@ export default function OrdersTable({ orders }: IProps) {
                 <thead className='text-center'>
                     <tr className='bg-primary text-white'>
                         <th className='py-5'>Order ID</th>
-                        <th className='py-5'>Painting's name</th>
+                        <th className='py-5'>Painting&apos;s name</th>
                         <th className='py-5'>Payment Method</th>
                         <th className='py-5'>Reference ID</th>
                         <th className='py-5'>Status</th>
@@ -38,7 +38,7 @@ export default function OrdersTable({ orders }: IProps) {
                             </td>
                             <td className='py-4'>Payment Method</td>
                             <td className='py-4'>{order.referenceID}</td>
-                            <td className='py-4'>{formatStatus(order.status)}</td>
+                            <td className='py-4'>{status(order.status)}</td>
                             <td className='py-4'>
                                 <button
                                     onClick={() => {
