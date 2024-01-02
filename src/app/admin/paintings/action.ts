@@ -156,7 +156,7 @@ const getWatermarkedImage = async (image: File) => {
     try {
         const buffer = Buffer.from(await image.arrayBuffer())
         const mainImage = await Jimp.read(buffer)
-        const watermarkImage = await Jimp.read('./src/images/vmeme_logo.jpg')
+        const watermarkImage = await Jimp.read('https://firebasestorage.googleapis.com/v0/b/vmeme-e34ec.appspot.com/o/vmeme_logo.jpg?alt=media&token=7a6e8fc2-315f-4347-8043-fc60e3c0e764')
         await watermarkImage.resize(200, Jimp.AUTO);
         const x = (mainImage.bitmap.width - watermarkImage.bitmap.width) / 2;
         const y = (mainImage.bitmap.height - watermarkImage.bitmap.height) / 2;
