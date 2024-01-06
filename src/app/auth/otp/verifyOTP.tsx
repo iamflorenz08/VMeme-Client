@@ -22,7 +22,7 @@ export default function VerifyOTP() {
             const credentials = await signIn('credentials', {
                 otp: data.otp,
                 redirect: false,
-                callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN || 'http://localhost:3000'}`
+                callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN || 'https://vmeme.vercel.app' || 'http://localhost:3000'}`
             })
 
             if (!credentials?.ok) return setError(credentials?.error)
