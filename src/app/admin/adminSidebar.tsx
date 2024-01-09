@@ -7,6 +7,7 @@ import { FaUserAstronaut } from '@react-icons/all-files/fa/FaUserAstronaut'
 import { FaPaintBrush } from '@react-icons/all-files/fa/FaPaintBrush'
 import { IoCart } from '@react-icons/all-files/io5/IoCart'
 import { HiMiniUserGroup } from "@react-icons/all-files/hi2/HiMiniUserGroup"
+import { IoMdSettings } from '@react-icons/all-files/io/IoMdSettings'
 
 export default function AdminSidebar() {
     const segment = useSelectedLayoutSegment()
@@ -40,6 +41,12 @@ export default function AdminSidebar() {
             href: '/admin/customers',
             current: segment === 'customers',
             icon: <HiMiniUserGroup size={28} />
+        },
+        {
+            label: 'Settings',
+            href: '/admin/settings',
+            current: segment === 'settings',
+            icon: <IoMdSettings size={28} />
         }
     ]
     return (

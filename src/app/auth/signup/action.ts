@@ -19,7 +19,7 @@ export async function signup(prevState: any, formData: FormData) {
                 email: z.string().min(1, { message: "Email is required." }).email({ message: "Invalid email address." }),
                 firstName: z.string().min(1, { message: "First name is required." }),
                 lastName: z.string().min(1, { message: "Last name is required" }),
-                password: z.string().min(1, { message: 'Password is required' }).min(5, { message: 'Too short, must be at least 5 characters' }),
+                password: z.string().regex(/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/, { message: 'Must be an alphanumeric.' }).min(1, { message: 'Password is required' }).min(5, { message: 'Too short, must be at least 5 characters' }),
                 confirmPassword: z.string().min(1, { message: 'Confirm password is required' })
             })
             .refine((data) => data.password === data.confirmPassword, { message: 'Password doesn\'t match.', path: ['confirmPassword'] })
@@ -49,7 +49,7 @@ export async function signup(prevState: any, formData: FormData) {
         })
 
         const data = await res.json()
-        
+
         if (!data.success) {
             result.message = data.message
 

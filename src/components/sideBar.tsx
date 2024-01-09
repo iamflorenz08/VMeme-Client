@@ -9,6 +9,7 @@ import { useState } from "react"
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { IoCartOutline } from '@react-icons/all-files/io5/IoCartOutline'
 import ProfileDropDown from "./profileDropDown"
+import { IPage } from "@/types/pageTypes"
 export interface INavigation {
     label: string,
     href: string,
@@ -16,7 +17,11 @@ export interface INavigation {
     icon?: any
 }
 
-export default function SideBar() {
+interface IProps {
+    pageInfo: IPage
+}
+
+export default function SideBar({ pageInfo }: IProps) {
     const segment = useSelectedLayoutSegment()
     const [isNavOpen, setIsNavOpen] = useState<boolean>(false)
     const { status } = useSession()
@@ -49,7 +54,7 @@ export default function SideBar() {
         <>
             <nav className="py-10 px-5 md:px-0 flex justify-between items-center container mx-auto">
                 <Link href={'/'}>
-                    <Image src={"/vmeme_logo.jpg"} alt="logo" width={150} height={32} />
+                    <Image src={pageInfo.imageURL || "/vmeme_logo.jpg"} alt="logo" width={150} height={32} />
                 </Link>
 
                 <div className="hidden gap-10 lg:gap-32 2xl:gap-40 items-center md:flex">

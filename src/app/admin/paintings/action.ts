@@ -158,13 +158,30 @@ const getWatermarkedImage = async (image: File) => {
         const mainImage = await Jimp.read(buffer)
         const watermarkImage = await Jimp.read('https://firebasestorage.googleapis.com/v0/b/vmeme-e34ec.appspot.com/o/vmeme_logo.jpg?alt=media&token=7a6e8fc2-315f-4347-8043-fc60e3c0e764')
         await watermarkImage.resize(200, Jimp.AUTO);
-        const x = (mainImage.bitmap.width - watermarkImage.bitmap.width) / 2;
-        const y = (mainImage.bitmap.height - watermarkImage.bitmap.height) / 2;
-        await mainImage.composite(watermarkImage, x, y, {
-            mode: Jimp.BLEND_SOURCE_OVER,
-            opacitySource: 0.5,
-            opacityDest: 1.0
-        })
+        const repeatX = Math.ceil(mainImage.bitmap.width / watermarkImage.bitmap.width);
+        const repeatY = Math.ceil(mainImage.bitmap.height / watermarkImage.bitmap.height);
+        for (let x = 0; x < repeatX; x++) {
+            for (let y = 0; y < repeatY; y++) {
+                const offsetX = x * (watermarkImage.bitmap.width + 80);
+                const offsetY = y * (watermarkImage.bitmap.height + 80);
+
+                // Create a clone of the watermark image and rotate it
+                const rotatedWatermark = watermarkImage.clone().rotate(45, false);
+
+                // Calculate the dimensions of the bounding box around the rotated watermark
+                const rotatedWidth = rotatedWatermark.bitmap.width;
+                const rotatedHeight = rotatedWatermark.bitmap.height;
+
+                // Calculate the positioning to ensure the entire rotated watermark fits within the result image
+                const positionX = offsetX - (rotatedWidth - watermarkImage.bitmap.width) / 2;
+                const positionY = offsetY - (rotatedHeight - watermarkImage.bitmap.height) / 2;
+                mainImage.composite(rotatedWatermark, positionX, positionY, {
+                    mode: Jimp.BLEND_SOURCE_OVER,
+                    opacitySource: 0.15,
+                    opacityDest: 1.0
+                });
+            }
+        }
         await mainImage.quality(100)
         return mainImage.getBufferAsync(Jimp.MIME_PNG)
     } catch (e) {
