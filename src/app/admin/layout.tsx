@@ -5,12 +5,19 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/utils/authOption'
 import { redirect } from 'next/navigation'
 import ProfileDropDown from './profileDropDown'
+import { IPage } from '@/types/pageTypes'
 interface IProps {
   children: React.ReactNode
 }
 
+export const getPage = async () => {
+  const res = await fetch(`${process.env.API_URI}/api/v1/page`, { cache: 'no-store' })
+  return res.json()
+}
+
 export default async function AdminLayout({ children }: IProps) {
   const session = await getServerSession(authOptions)
+  const pageInfo: IPage = await getPage()
   if (session?.user.role !== 'admin') redirect('/')
   return (
     <section className="flex w-full h-screen max-h-screen">
@@ -19,7 +26,7 @@ export default async function AdminLayout({ children }: IProps) {
         <div className="flex justify-start ">
           <Image
             className="w-full"
-            src={'/vmeme_logo.jpg'}
+            src={pageInfo.imageURL || '/vmeme_logo.jpg'}
             alt="logo"
             width={100}
             height={100}
