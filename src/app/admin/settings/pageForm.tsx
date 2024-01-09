@@ -17,7 +17,7 @@ export default function PageForm({ pageInfo }: IProps) {
                 />
             </div>
             <div className='flex items-center gap-4'>
-                <label htmlFor="">Company's name: </label>
+                <label htmlFor="">Company&apos;s name: </label>
                 <input
                     type="text"
                     className="px-3 py-3 h-fit outline-none rounded-md border border-gray"
