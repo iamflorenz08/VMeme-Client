@@ -1,19 +1,17 @@
-import BackNav from "@/components/backNav"
+import BackNav from "@/components/backNav";
 
 interface IProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export const metadata = {
-    title: "About",
-}
+  title: "About",
+};
 export default function layout({ children }: IProps) {
-    return (
-        <>
-            <BackNav
-                label="Back to a artist"
-            />
-            {children}
-        </>
-    )
+  return (
+    <>
+      <BackNav label="Back to artist" />
+      {children}
+    </>
+  );
 }
