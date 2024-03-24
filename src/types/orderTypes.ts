@@ -3,6 +3,7 @@ import { IPainting } from "./paintings";
 
 export interface IOrder {
     _id: string,
+    orderId?: string,
     user: string,
     email: string,
     phoneNumber: string,
